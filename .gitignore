@@ -48,7 +48,7 @@ local.properties
 .springBeans
 .classpath
 .project
-.settings
+target/
 
 # Code Recommenders
 .recommenders/
