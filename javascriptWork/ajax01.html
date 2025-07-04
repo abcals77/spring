@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    // fetch() => $.ajax();
+    $.ajax(`https://reqres.in/api/users?page=2`, {
+      beforeSend(xhr){
+        // Header 정보 변경 : XMLHttpRequest
+        xhr.setRequestHeader('x-api-key','reqres-free-v1');
+      }
+    })
+    .done(result => {
+      console.log(result);
+    })
+    .fail(err => console.log(err));
+
+
+    $.ajax(`https://reqres.in/api/users`,{
+      type : 'post', // fetch의 method
+      // Default Content-type : 'application/x-www-form-urlencoded'
+      // { key : value } -> key = value
+      data : JSON.stringify({
+        "name": "morpheus",
+        "job": "leader"
+      }), // fetch의 body -> 객체로 저장, 문자열은 저장 X
+      contentType : 'application/json', // headers에 등록하는 정보 중 content-type
+      beforeSend(xhr){
+        xhr.setRequestHeader('x-api-key','reqres-free-v1');
+      }
+    })
+    .done(result => {
+      console.log(result);
+    })
+    .fail(err => console.log(err));
+
+  </script>
+</body>
+</html>

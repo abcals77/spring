@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery01</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    .red {
+      color: #ff0000;
+    }
+
+    .blue {
+      color: #0000ff;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h1>Cities</h1>
+    <ul>
+      <li id="one" class="red">Seoul</li>
+      <li id="two" class="red">London</li>
+      <li id="three" class="red">Newyork</li>
+      <li>
+        <p name="city">Daegu</p>
+      </li>
+      <li id="four">Tokyo</li>
+    </ul>
+    <p class="blue">content</p>
+  </div>
+</body>
+<script>
+  let tag = jQuery('#four');
+  // console.log(tag);
+  jQuery('#four').text('도쿄').addClass('blue');
+  
+  // => jQuery('#four').text('도쿄').addClass('blue'); javascript일 경우 아래 3줄로 작성
+  tag = document.querySelector('#four');
+  tag.textContent = 'Tokyo';
+  tag.classList.add('blue');
+  // 함수 jQuery()를 기반으로 태그 탐색 및 태그 조작
+  // 1) 태그 탐색 + css Selector
+  let choice = jQuery('#three');
+  console.log('id 속성 three', choice);
+  choice = jQuery('.red');
+  console.log('class 속성 red', choice);
+  choice = jQuery('li p[name="city"]');
+  console.log('li 태그의 하위요소 중 name 속성이 city인 p 태그', choice);
+  // 2) 태그 속성 jQuery => $() 같음, 변경가능
+  $('#three').text('뉴욕'); // 텍스트 속성 변경 시 text() 사용
+  // class 속성 변경
+  $('.red').removeClass('red').addClass('blue'); // 클래스 변경 시(클래스는 다중 값 사용 가능)
+                                                 // removeClass를 이용하여 삭제 후 addClass를 사용하여 추가해서 변경
+                                                 // 배열 값이라도 forEach없이 전체 변경
+  // foreach => each
+  $('.blue').each(function(index, tag){
+    // tag는 Javascropt의 HTMLElement
+    if(tag.tagName == 'LI'){
+      // tag.classList.replace('blue', 'red'); => node 기반
+      $(tag).removeClass('blue').addClass('red'); // jQuery 기반
+    } 
+  });
+  // .html(), .val(), .css()
+  // 나머지 속성들에 대한 처리 : attr();
+  $('li > p').attr('name', 'country');
+
+  // 속성 값 반환
+  let attrs = $('p.blue').text();
+  console.log('class 속성이 blue인 p태그', attrs);
+  attrs = $('li > p').attr('name');
+  console.log('li태그의 자식태그 중 p태그', attrs);
+  
+  // 3) 태그 생성 및 추가
+  let newTag = $('<input type="text" id="title"></input>'); // innerHTML과 같은 기능
+  newTag.val('Welcome!!!!');
+  console.log(newTag);
+  $('div').append(newTag);
+
+  // 실시간 검색어 출력 기능
+  let display = $('<p>여기에 출력합니다.</p>');
+  $('ul').append(display)
+
+  // addEventListener => on
+  $('div > input').on('input', function(event){
+    let inputTag = event.currentTarget;
+    let keyword = $(inputTag).val();
+    let pTag = $(inputTag).closest('div') // closest 부모(태그)를 조회하고 만나면 stop
+                          .children('ul') // 매개변수가 없을 경우 내가 가진 자식 전부 => ul태그만 검색
+                          .last(); // 마지막 자식 => ul태그가 가지고 있는 마지막 자식
+    pTag.text(keyword);
+  });
+
+</script>
+</html>

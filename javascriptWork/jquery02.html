@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <script>
+    function test(){}; // 함수선언문
+    const testFun = () => {}; // 함수표현식
+    document.addEventListener('DOMContentLoaded', function(event){}) // 우리가 완성한 HTML부분만
+    window.onload = function(event){}; // 완전한 페이지(최상위 모든 영역)
+
+    // $(document).ready(function(){}); DOMContentLoaded를 읽는 방식
+    $(function(){ // DOM이 완성되면 
+      let divTag = $('div').text('selectedTag');
+      console.log(divTag);
+      
+      /* 
+        <ul>
+          <li></li>
+          <li></li>
+        </ul>
+      */
+      let ul = $('<ul/>');
+      let li = $('<li/>').text('사과').attr('id', 'first');
+      ul.append(li);
+      li = $('<li id="second">바나나</li>');
+      ul.append(li);
+      console.log('ul', ul);
+
+      $('div#show').html(ul);
+
+    }); // 생략형
+
+  </script>
+  <div id="show"></div>
+</body>
+</html>

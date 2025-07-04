@@ -8,16 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 //@SpringBootApplication
-@SpringBootConfiguration 
-@EnableAutoConfiguration // Auto-Config
-@ComponentScan // Spring
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan
 
 @MapperScan(basePackages = "com.yedam.app.**.mapper")
-// -> mybatis, 경로 미설정 시 ComponentScan과 범위가 겹침
-public class Sp02Application {
+public class Work01Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Sp02Application.class, args);
+		SpringApplication.run(Work01Application.class, args);
 	}
 
 }
